@@ -1,5 +1,5 @@
 
-# Movies RestFUL node api
+# Movies API - node JS
 
 | Route | HTTP Verb	 | POST body	 | Description	 |
 | --- | --- | --- | --- |
