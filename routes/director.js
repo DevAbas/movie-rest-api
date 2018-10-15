@@ -107,5 +107,30 @@ router.get('/:director_id', (req, res, next) => {
   .catch(err => { res.json(err) })
 });
 
+// Update director endpoint
+router.put('/:director_id', (req, res, next) => {
+  Director.findByIdAndUpdate(
+    req.params.director_id, 
+    req.body,
+    {
+      new: true
+    }
+  )
+    .then(director => { 
+      res.json(director);
+    })
+    .catch(err => { 
+      next({ message: 'The director was not found.', code: 99 }) 
+    });
+});
+
+// Delete director endpoint
+router.delete('/:director_id', (req, res, next) => {
+  Director.findByIdAndRemove( req.params.director_id )
+    .then(director => { 
+      res.json({ message: 'Deleted director' });
+    })
+    .catch(err => { next({ message: 'The director was not found.', code: 99 });   });
+});
 
 module.exports = router;

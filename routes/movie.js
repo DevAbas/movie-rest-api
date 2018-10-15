@@ -18,7 +18,19 @@ router.post('/', function(req, res, next) {
 
 // Get all movies router
 router.get('/', (req, res, next) => {
-  Movie.find({})
+  Movie.aggregate([
+		{
+			$lookup: {
+				from: 'directors',
+				localField: 'director_id',
+				foreignField: '_id',
+				as: 'director'
+			}
+		},
+		{
+			$unwind: '$director'
+		}
+	])
     .then(data => { res.json(data) })
     .catch(err => { res.json(err) })
 });
