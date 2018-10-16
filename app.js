@@ -4,11 +4,16 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const db = require('./config/db')();
+const secret = require('./config/secret');
+const verifyToken = require('./middleware/verify-token');
 const indexRouter = require('./routes/index');
 const moviesRouter = require('./routes/movie');
 const directorRouter = require('./routes/director');
 
 const app = express();
+
+// API SECRET KEY
+app.set('api_secret_key', secret.api_secret_key);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api', verifyToken);
 app.use('/api/movies', moviesRouter);
 app.use('/api/directors', directorRouter);
 
