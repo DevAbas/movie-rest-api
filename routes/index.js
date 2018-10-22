@@ -6,6 +6,11 @@ const bcrypt = require('bcrypt');
 // Model
 const User = require('../models/User');
 
+// Returns index page endpoint
+router.get('/', (req, res) => {
+  res.json({ title: 'Index page' })
+})
+
 /* Register enpoint */
 router.post('/register', (req, res, next) => {
   const { username, password } = req.body;
