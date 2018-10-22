@@ -12,7 +12,7 @@ const directorRouter = require('./routes/director');
 
 const app = express();
 
-// API SECRET KEY
+// API SECRET key
 app.set('api_secret_key', secret.api_secret_key);
 
 // view engine setup
