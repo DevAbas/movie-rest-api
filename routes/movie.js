@@ -70,7 +70,7 @@ router.put('/:movie_id', (req, res, next) => {
 router.delete('/:movie_id', (req, res, next) => {
   Movie.findByIdAndRemove( req.params.movie_id )
     .then(movie => { 
-      res.json({ message: 'Deleted movie' });
+      res.json({ message: 'Deleted movie', status: 1 });
     })
     .catch(err => { next({ message: 'The movie was not found.', code: 99 });   });
 });
